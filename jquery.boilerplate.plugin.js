@@ -64,10 +64,11 @@
   // preventing against multiple instantiations
   $.fn[pluginName] = function ( options ) {
     return this.each(function () {
-      if (!$.data(this, "plugin_" + pluginName)) {
-        $.data(this, "plugin_" + pluginName, new Plugin( this, options ));
-      } else if(typeof(options) === 'string' && typeof($.data(this, "plugin_" + pluginName)[options]) === 'function') {
-        $.data(this, "plugin_" + pluginName)[options].call(this, Array.prototype.slice.call(arguments, 1));
+      var pluginKey = 'plugin_' + pluginName;
+      if (!$.data(this, pluginKey)) {
+        $.data(this, pluginKey, new Plugin( this, options ));
+      } else if(typeof(options) === 'string' && typeof($.data(this, pluginKey)[options]) === 'function') {
+        $.data(this, pluginKey)[options].call(this, Array.prototype.slice.call(arguments, 1));
       }
     });
   };
