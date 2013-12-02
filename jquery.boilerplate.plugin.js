@@ -71,7 +71,7 @@
         if (!$.data(this, pluginKey)) {
           $.data(this, pluginKey, new Plugin( this, options ));
         } else if(typeof(options) === 'string' && typeof($.data(this, pluginKey)[options]) === 'function') {
-          $.data(this, pluginKey)[options].call(this, Array.prototype.slice.call(arguments, 1));
+          $.data(this, pluginKey)[options].apply(this, Array.prototype.slice.call(arguments, 1));
         }
       });
     };
